@@ -4,6 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mergington High School Activities</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="icon"
@@ -12,15 +25,21 @@
     />
   </head>
   <body>
-    <div class="announcement-banner" role="status" aria-live="polite">
-      <span aria-hidden="true">📢</span>
-      <span>Activity registration is open until the end of the month. Don't lose your spot!</span>
+    <div id="announcement-banner" class="announcement-banner hidden" role="status" aria-live="polite">
+      <div id="announcement-items" class="announcement-items"></div>
     </div>
     <header>
       <h1>Mergington High School</h1>
       <h2>Extracurricular Activities</h2>
       <div id="user-controls">
         <div id="user-status">
+          <button
+            id="manage-announcements-button"
+            class="icon-button hidden"
+            aria-label="Manage announcements"
+          >
+            <span>Manage Announcements</span>
+          </button>
           <button id="login-button" class="icon-button">
             <span class="user-icon">👤</span>
             <span>Login</span>
@@ -135,6 +154,55 @@
           <button type="submit">Login</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <div
+      id="announcements-modal"
+      class="modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="announcements-modal-title"
+    >
+      <div class="modal-content announcements-modal-content">
+        <span class="close-announcements-modal" aria-label="Close announcements manager">&times;</span>
+        <h3 id="announcements-modal-title">Manage Announcements</h3>
+        <div class="announcements-modal-grid">
+          <section class="announcement-list-panel">
+            <h4>Existing Announcements</h4>
+            <div id="admin-announcements-list" class="admin-announcements-list"></div>
+          </section>
+          <section class="announcement-form-panel">
+            <h4 id="announcement-form-title">Create Announcement</h4>
+            <form id="announcement-form">
+              <input type="hidden" id="announcement-id" value="" />
+              <div class="form-group">
+                <label for="announcement-message">Message:</label>
+                <textarea
+                  id="announcement-message"
+                  required
+                  rows="4"
+                  maxlength="280"
+                  placeholder="Write a clear, short update for students and families."
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="announcement-start-date">Start date (optional):</label>
+                <input type="date" id="announcement-start-date" />
+              </div>
+              <div class="form-group">
+                <label for="announcement-expiration-date">Expiration date:</label>
+                <input type="date" id="announcement-expiration-date" required />
+              </div>
+              <div class="announcement-form-actions">
+                <button type="submit" id="save-announcement-button">Save Announcement</button>
+                <button type="button" id="cancel-edit-announcement" class="secondary-button hidden">
+                  Cancel Edit
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
       </div>
     </div>
 
